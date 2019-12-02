@@ -220,5 +220,3 @@ const handleMouseOut2 = (d, i, n) => {
 };
 
 }
-
-export default paint;
