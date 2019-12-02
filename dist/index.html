@@ -5,25 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./css/reset.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="./css/styles.css" />
     <title>Gem Cities!</title>
     <script type="application/javascript" src="./bundle.js" defer></script>
 </head>
-<body>
-    <div class="main-graph">
-        <h1 class="title">Gem Cities</h1>
-        <svg width="600" height="600" id="svg">
+<body class="indigo">
 
-        </svg>
+    <header class="indigo darken-1 section">
+        <h2 class="center white-text">Gem Cities</h2>
+        <p class="flow-text grey-text center text-lighten-2">Discover popular destinations!...</p>
+    </header>
+
+    <div class="section">
+        <div class="row content">
+            <div class="col s12 m8">
+                <svg id="map-svg" width="860" height="600"></svg>
+            </div>
+            <div class="col s12 m4">
+                <div id="city-title"></div>
+                <div id="canvas2" class="canvas2">
+                    
+                </div>
+                <div class="selectors">
+                    <div id="sfo" class="white-text center">SFO</div>
+                    <div id="nyc" class="white-text center">NYC</div>
+                    <div id="aus" class="white-text center">AUS</div>
+                    <div id="atl" class="white-text center">ATL</div>
+                    <div id="mia" class="white-text center">MIA</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
-    
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
-    
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -38,10 +57,16 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
         const db = firebase.firestore();
-        db.settings({ timestampsInSnapshots: true });
+        firebase.analytics();
     </script>
-    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="//d3js.org/topojson.v2.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <!-- <script type="application/javascript" src="./main.js"></script>
+    <script src="./js/graph2.js"></script> -->
+    <script src="./js/graph2.js"></script>
 </body>
 </html>
