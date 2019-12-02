@@ -1,4 +1,4 @@
-let paint = (city) => {
+const paint = (city) => {
 
 const dims2 = { height: 300, width: 300, radius: 150 };
 const cent2 = { x: dims2.width / 2 + 5, y: dims2.width / 2 + 5 };
@@ -220,3 +220,5 @@ const handleMouseOut2 = (d, i, n) => {
 };
 
 }
+
+export default paint;
