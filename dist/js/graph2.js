@@ -58,17 +58,17 @@ graph2.call(tip2);
 
 // update2 function
 
-const update2 = data2 => {
-  color2.domain(data2.map(d => d.cityName));
+const update2 = data => {
+  color2.domain(data.map(d => d.cityName));
 
   // update2 and call legend2
 
   legendGroup2.call(legend2);
   legendGroup2.selectAll("text").attr("fill", "white");
 
-  // join enhanced (pie2) data2 to path elements
+  // join enhanced (pie2) data to path elements
 
-  const paths2 = graph2.selectAll("path").data(pie2(data2));
+  const paths2 = graph2.selectAll("path").data(pie2(data));
 
   paths2
     .exit()
@@ -116,7 +116,7 @@ const update2 = data2 => {
 
 // // data array and firestore
 
-var data2 = [];
+var data = [];
 
 db.collection("cities")
   .doc(city)
@@ -127,21 +127,21 @@ db.collection("cities")
 
       switch (change.type) {
         case "added":
-          data2.push(doc);
+          data.push(doc);
           break;
         case "modified":
           const index = data.findIndex(item => item.id == doc.id);
-          data2[index] = doc;
+          data[index] = doc;
           break;
         case "removed":
-          data2 = data.filter(item => item.id !== doc.id);
+          data = data.filter(item => item.id !== doc.id);
           break;
         default:
           break;
       }
     });
 
-    update2(data2);
+    update2(data);
   });
 
 // db.collection("cities")
@@ -153,21 +153,21 @@ db.collection("cities")
 
 //       switch (change.type) {
 //         case "added":
-//           data2.push(doc);
+//           data.push(doc);
 //           break;
 //         case "modified":
 //           const index = data.findIndex(item => item.id == doc.id);
-//           data2[index] = doc;
+//           data[index] = doc;
 //           break;
 //         case "removed":
-//           data2 = data.filter(item => item.id !== doc.id);
+//           data = data.filter(item => item.id !== doc.id);
 //           break;
 //         default:
 //           break;
 //       }
 //     });
 
-//     update2(data2);
+//     update2(data);
 //   });
 
 const arcTweenEnter2 = d => {

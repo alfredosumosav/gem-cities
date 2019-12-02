@@ -137,15 +137,15 @@ var paint = function paint(city) {
   });
   graph2.call(tip2); // update2 function
 
-  var update2 = function update2(data2) {
-    color2.domain(data2.map(function (d) {
+  var update2 = function update2(data) {
+    color2.domain(data.map(function (d) {
       return d.cityName;
     })); // update2 and call legend2
 
     legendGroup2.call(legend2);
-    legendGroup2.selectAll("text").attr("fill", "white"); // join enhanced (pie2) data2 to path elements
+    legendGroup2.selectAll("text").attr("fill", "white"); // join enhanced (pie2) data to path elements
 
-    var paths2 = graph2.selectAll("path").data(pie2(data2));
+    var paths2 = graph2.selectAll("path").data(pie2(data));
     paths2.exit().transition().duration(750).attrTween("d", arcTweenExit2).remove(); // handles the current DOM path updates
 
     paths2.attr("d", arcPath2).transition().duration(750).attrTween("d", arcTweenUpdate);
@@ -166,7 +166,7 @@ var paint = function paint(city) {
   // // data array and firestore
 
 
-  var data2 = [];
+  var data = [];
   db.collection("cities").doc(city).collection("flights").onSnapshot(function (res) {
     res.docChanges().forEach(function (change) {
       var doc = _objectSpread({}, change.doc.data(), {
@@ -175,18 +175,18 @@ var paint = function paint(city) {
 
       switch (change.type) {
         case "added":
-          data2.push(doc);
+          data.push(doc);
           break;
 
         case "modified":
           var index = data.findIndex(function (item) {
             return item.id == doc.id;
           });
-          data2[index] = doc;
+          data[index] = doc;
           break;
 
         case "removed":
-          data2 = data.filter(function (item) {
+          data = data.filter(function (item) {
             return item.id !== doc.id;
           });
           break;
@@ -195,7 +195,7 @@ var paint = function paint(city) {
           break;
       }
     });
-    update2(data2);
+    update2(data);
   }); // db.collection("cities")
   //   .doc("EXMrIeJ31m7m8M3klVPb")
   //   .collection("flights")
@@ -204,20 +204,20 @@ var paint = function paint(city) {
   //       const doc = { ...change.doc.data(), id: change.doc.id };
   //       switch (change.type) {
   //         case "added":
-  //           data2.push(doc);
+  //           data.push(doc);
   //           break;
   //         case "modified":
   //           const index = data.findIndex(item => item.id == doc.id);
-  //           data2[index] = doc;
+  //           data[index] = doc;
   //           break;
   //         case "removed":
-  //           data2 = data.filter(item => item.id !== doc.id);
+  //           data = data.filter(item => item.id !== doc.id);
   //           break;
   //         default:
   //           break;
   //       }
   //     });
-  //     update2(data2);
+  //     update2(data);
   //   });
 
   var arcTweenEnter2 = function arcTweenEnter2(d) {
